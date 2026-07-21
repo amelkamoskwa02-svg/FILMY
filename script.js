@@ -79,7 +79,7 @@ function playMovie(item) {
   
   if (item.embedUrl) {
     playerWrapper.innerHTML = `
-      <iframe src="${item.embedUrl}" width="100%" height="480" allow="autoplay" style="border:none; border-radius:12px;"></iframe>
+  <iframe src="${item.embedUrl}" width="100%" height="500" allow="autoplay; fullscreen" allowfullscreen style="border:none; border-radius:12px;"></iframe>
     `;
   } else if (item.videoUrl) {
     playerWrapper.innerHTML = `
