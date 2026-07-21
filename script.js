@@ -73,23 +73,43 @@ document.querySelectorAll('.nav-btn').forEach(button => {
   });
 });
 
-// Odtwarzanie wideo
+// Odtwarzanie wideo z obsługą trybu kinowego
 function playMovie(item) {
   videoTitle.textContent = item.title;
   
   if (item.embedUrl) {
     playerWrapper.innerHTML = `
-  <iframe src="${item.embedUrl}" width="100%" height="500" allow="autoplay; fullscreen" allowfullscreen style="border:none; border-radius:12px;"></iframe>
-    `;
-  } else if (item.videoUrl) {
-    playerWrapper.innerHTML = `
-      <video id="main-player" controls autoplay style="width:100%; max-height:500px; border-radius:12px;">
-        <source src="${item.videoUrl}" type="video/mp4">
-      </video>
+      <div class="player-controls">
+        <button id="theater-btn" onclick="toggleTheater()">📺 Pełny ekran na stronie</button>
+      </div>
+      <div id="video-container">
+        <iframe 
+          src="${item.embedUrl}" 
+          width="100%" 
+          height="500" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          style="border:none; border-radius:12px;">
+        </iframe>
+      </div>
     `;
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Funkcja przełączająca tryb kinowy (powiększenie na cały ekran przeglądarki)
+function toggleTheater() {
+  const container = document.getElementById('video-container');
+  const btn = document.getElementById('theater-btn');
+  
+  container.classList.toggle('theater-mode');
+  
+  if (container.classList.contains('theater-mode')) {
+    btn.textContent = '❌ Zamknij pełny ekran';
+  } else {
+    btn.textContent = '📺 Pełny ekran na stronie';
+  }
 }
 
 // Pierwsze uruchomienie
