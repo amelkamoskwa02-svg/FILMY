@@ -1,9 +1,7 @@
 // Baza danych
 const contentData = {
   filmy: 
-  1670: [
-  {
-    title:
+    }
 csi: [
          {
       id: 103,
