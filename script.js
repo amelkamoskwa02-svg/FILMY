@@ -36,7 +36,7 @@ const contentData = {
       id: 15,
       title: "CSI: Odcinek 15",
       poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+15",
-      embedUrl: "https://drive.google.com/file/d/1AgA1_NoKlpj0Uls9bQHmkBe6w8ZOozul/preview"
+      embedUrl: "https://drive.google.com/file/d/1Hbm3AjDRauh1jEajepX9Wn_56DZMP9wY/preview"
     },
     {
       id: 16,
