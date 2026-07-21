@@ -3,36 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kino ze Znajomymi</title>
+  <title>Moje Filmy i Seriale</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <h1>🎬 Nasze Domowe Kino</h1>
-    <!-- Menu z zakładkami -->
-  <!-- Menu z zakładkami -->
-    <nav class="categories">
-      <button class="nav-btn" data-category="filmy">Filmy</button>
-      <button class="nav-btn active" data-category="csi">CSI</button>
-    </nav>
-  </header>
+  <!-- Nawigacja / Zakładki -->
+  <nav class="navbar">
+    <div class="logo">FILMY</div>
+    <div class="categories">
+      <button class="category-btn" data-category="filmy">Filmy</button>
+      <button class="category-btn active" data-category="csi">CSI</button>
+    </div>
+  </nav>
 
-  <main>
-    <!-- Główny Odtwarzacz -->
-    <section class="player-container">
-      <h2 id="video-title">Wybierz film lub odcinek z listy poniżej</h2>
+  <!-- Odtwarzacz Wideo -->
+  <main class="container">
+    <section class="player-section">
+      <h2 id="video-title">Wybierz odcinek z listy poniżej</h2>
       <div id="player-wrapper">
-        <video id="main-player" controls poster="https://via.placeholder.com/800x450?text=Wybierz+film">
-          <source id="video-source" src="" type="video/mp4">
-          Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-        </video>
+        <div id="video-container">
+          <img src="https://placehold.co/800x450/111111/e50914?text=Wybierz+film" alt="Odtwarzacz" style="width: 100%; border-radius: 12px;">
+        </div>
       </div>
     </section>
 
-    <!-- Lista Filmów / Odcinków -->
-    <section class="movies-grid" id="movies-list">
-      <!-- Generowane przez JavaScript -->
+    <!-- Siatka z kafelkami -->
+    <section class="movies-section">
+      <h2>Lista Odcinków</h2>
+      <div id="movies-grid" class="movies-grid"></div>
     </section>
   </main>
 
