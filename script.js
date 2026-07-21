@@ -15,16 +15,10 @@ const contentData = {
       embedUrl: "https://drive.google.com/file/d/17eUNUQNUxqwJBLOL4hQUP8tUABH3hRC9/preview"
     },
     {
-      id: 11,
-      title: "CSI: Odcinek 11",
-      poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+11",
-      embedUrl: "https://buzzheavier.com/2j63650cgz76"
-    },
-    {
       id: 12,
       title: "CSI: Odcinek 12",
       poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+12",
-      embedUrl: "https://drive.google.com/file/d/1e8wpgPdTY3kStgR79Zj3gWhVIdnG6af2/preview"
+      embedUrl: "https://drive.google.com/file/d/1vvpCiZGe5gk3rEb2apJ2Ivp2dBaYbu75/preview"
     },
     {
       id: 13,
@@ -36,19 +30,19 @@ const contentData = {
       id: 14,
       title: "CSI: Odcinek 14",
       poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+14",
-      embedUrl: "https://drive.google.com/file/d/1ceY8dE_xR7WzaO2e3-3oya8JkgfRu54Q/preview"
+      embedUrl: "https://drive.google.com/file/d/1HyHSnTEdipA5RWxWIwyOk0WdFeoh9lI4/preview"
     },
     {
       id: 15,
       title: "CSI: Odcinek 15",
       poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+15",
-      embedUrl: "https://drive.google.com/file/d/1-BlqaY1LR7958WiC9t-fb3-1HGCP9CEu/preview"
+      embedUrl: "https://drive.google.com/file/d/1AgA1_NoKlpj0Uls9bQHmkBe6w8ZOozul/preview"
     },
     {
       id: 16,
       title: "CSI: Odcinek 16 – SUPRA",
       poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+16",
-      embedUrl: "https://drive.google.com/file/d/17AxF_iJz0T7q5ccgi9Mo7TxoFk-uU0Pt/preview"
+      embedUrl: "https://drive.google.com/file/d/1AgA1_NoKlpj0Uls9bQHmkBe6w8ZOozul/preview"
     },
     {
       id: 17,
@@ -83,7 +77,7 @@ const contentData = {
   ]
 };
 
-// Automatyczne szukanie elementu siatki w HTML (pancerne zabezpieczenie przed błędem)
+// Automatyczne szukanie elementu siatki w HTML
 const moviesGrid = document.getElementById('movies-grid') || 
                    document.getElementById('movies-container') || 
                    document.querySelector('.movies-grid') || 
