@@ -83,8 +83,12 @@ const contentData = {
   ]
 };
 
-// Elementy DOM
-const moviesGrid = document.getElementById('movies-grid');
+// Automatyczne szukanie elementu siatki w HTML (pancerne zabezpieczenie przed błędem)
+const moviesGrid = document.getElementById('movies-grid') || 
+                   document.getElementById('movies-container') || 
+                   document.querySelector('.movies-grid') || 
+                   document.querySelector('.movie-grid');
+
 const playerWrapper = document.getElementById('player-wrapper');
 const videoTitle = document.getElementById('video-title');
 const categoryButtons = document.querySelectorAll('.category-btn');
@@ -93,11 +97,16 @@ let currentCategory = 'csi';
 
 // Funkcja renderująca listę kafelków
 function renderMovies() {
+  if (!moviesGrid) {
+    console.error("BŁĄD: Nie znaleziono kontenera na filmy w pliku HTML!");
+    return;
+  }
+
   moviesGrid.innerHTML = '';
   const currentList = contentData[currentCategory] || [];
 
   if (currentList.length === 0) {
-    moviesGrid.innerHTML = '<p style="color: #888;">Brak filmów w tej kategorii.</p>';
+    moviesGrid.innerHTML = '<p style="color: #888; text-align: center; grid-column: 1/-1;">Brak filmów w tej kategorii.</p>';
     return;
   }
 
@@ -128,7 +137,11 @@ categoryButtons.forEach(button => {
 
 // Odtwarzanie wideo
 function playMovie(item) {
-  videoTitle.textContent = item.title;
+  if (!playerWrapper) return;
+
+  if (videoTitle) {
+    videoTitle.textContent = item.title;
+  }
   
   if (item.embedUrl) {
     playerWrapper.innerHTML = `
@@ -158,13 +171,17 @@ function toggleTheater() {
   
   if (container) {
     container.classList.toggle('theater-mode');
-    if (container.classList.contains('theater-mode')) {
-      btn.textContent = '❌ Zamknij pełny ekran';
-    } else {
-      btn.textContent = '📺 Pełny ekran na stronie';
+    if (btn) {
+      if (container.classList.contains('theater-mode')) {
+        btn.textContent = '❌ Zamknij pełny ekran';
+      } else {
+        btn.textContent = '📺 Pełny ekran na stronie';
+      }
     }
   }
 }
 
 // Pierwsze uruchomienie
-renderMovies();
+document.addEventListener('DOMContentLoaded', () => {
+  renderMovies();
+});
