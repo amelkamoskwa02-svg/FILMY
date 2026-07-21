@@ -2,6 +2,7 @@
 const contentData = {
   filmy: [],
   csi: [
+    {
       id: 9,
       title: "CSI: Odcinek 9",
       poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+9",
@@ -82,56 +83,50 @@ const contentData = {
   ]
 };
 
-let currentCategory = 'csi'; // Domyślna kategoria
-
-const moviesListContainer = document.getElementById('movies-list');
+// Elementy DOM
+const moviesGrid = document.getElementById('movies-grid');
 const playerWrapper = document.getElementById('player-wrapper');
 const videoTitle = document.getElementById('video-title');
+const categoryButtons = document.querySelectorAll('.category-btn');
 
-// Wyświetlenie listy dla danej kategorii
+let currentCategory = 'csi';
+
+// Funkcja renderująca listę kafelków
 function renderMovies() {
-  moviesListContainer.innerHTML = '';
-  const items = contentData[currentCategory] || [];
+  moviesGrid.innerHTML = '';
+  const currentList = contentData[currentCategory] || [];
 
-  if (items.length === 0) {
-    moviesListContainer.innerHTML = '<p style="text-align:center; width:100%;">Brak wideo w tej kategorii.</p>';
+  if (currentList.length === 0) {
+    moviesGrid.innerHTML = '<p style="color: #888;">Brak filmów w tej kategorii.</p>';
     return;
   }
 
-  items.forEach(item => {
+  currentList.forEach(item => {
     const card = document.createElement('div');
     card.classList.add('movie-card');
-    
     card.innerHTML = `
       <img src="${item.poster}" alt="${item.title}">
-      <h3>${item.title}</h3>
+      <div class="movie-info">
+        <h3>${item.title}</h3>
+      </div>
     `;
-
-    card.addEventListener('click', () => {
-      playMovie(item);
-    });
-
-    moviesListContainer.appendChild(card);
+    card.addEventListener('click', () => playMovie(item));
+    moviesGrid.appendChild(card);
   });
 }
 
-// Obsługa kliknięć w przyciski zakładek
-document.querySelectorAll('.nav-btn').forEach(button => {
+// Podpięcie przycisków kategorii/zakładek
+categoryButtons.forEach(button => {
   button.addEventListener('click', (e) => {
-    // Usunięcie klasy 'active' ze wszystkich przycisków
-    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-    
-    // Dodanie 'active' do klikniętego przycisku
+    categoryButtons.forEach(btn => btn.classList.remove('active'));
     e.target.classList.add('active');
-    
-    // Pobranie kategorii z atrybutu data-category
+
     currentCategory = e.target.getAttribute('data-category');
-    
     renderMovies();
   });
 });
 
-// Odtwarzanie wideo z obsługą trybu kinowego
+// Odtwarzanie wideo
 function playMovie(item) {
   videoTitle.textContent = item.title;
   
@@ -156,17 +151,18 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Funkcja przełączająca tryb kinowy (powiększenie na cały ekran przeglądarki)
+// Funkcja trybu kinowego
 function toggleTheater() {
   const container = document.getElementById('video-container');
   const btn = document.getElementById('theater-btn');
   
-  container.classList.toggle('theater-mode');
-  
-  if (container.classList.contains('theater-mode')) {
-    btn.textContent = '❌ Zamknij pełny ekran';
-  } else {
-    btn.textContent = '📺 Pełny ekran na stronie';
+  if (container) {
+    container.classList.toggle('theater-mode');
+    if (container.classList.contains('theater-mode')) {
+      btn.textContent = '❌ Zamknij pełny ekran';
+    } else {
+      btn.textContent = '📺 Pełny ekran na stronie';
+    }
   }
 }
 
