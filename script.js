@@ -1,49 +1,34 @@
-// Baza danych – usunięto stare przykłady
+// Baza danych
 const contentData = {
   filmy: [
     {
       id: 1,
       title: "Mój Pierwszy Film",
       poster: "https://via.placeholder.com/200x300?text=Film+1",
-      // Wklej poniżej link z opcji "Osadź element" z Dysku Google (iframe) 
-      // LUB bezpośredni link .mp4:
       embedUrl: "https://drive.google.com/file/d/TUTAJ_TWÓJ_ID/preview"
     }
   ],
   csi: [
     {
       id: 101,
-      title: "CSI: Odcinek 22 manta",
+      title: "CSI: Odcinek 21 VIPER ACR vs ROUTE 66! PART 2/2 - O kosmitach, kasynach i innych przygodach ",
       poster: "https://via.placeholder.com/200x300?text=CSI+S01E01",
-      https://drive.google.com/file/d/1HQ92V19nlXWlauoRVC9ICXmlODhkqNsI/view?usp=drivesdk
-      embedUrl: "https://drive.google.com/file/d/TUTAJ_TWÓJ_ID/preview"
+      embedUrl: "https://drive.google.com/file/d/12lDZz7ry_D9f6b6YfuA8qDdzsY6q-QSB/view?usp=drivesdk"
     },
     {
       id: 102,
-      title: "CSI: Odcinek 21",
+      title: "CSI: Odcinek22 Porsche 911 MANTA GT1 - caly projekt",
       poster: "https://via.placeholder.com/200x300?text=CSI+S01E02",
-       https://drive.google.com/file/d/12lDZz7ry_D9f6b6YfuA8qDdzsY6q-QSB/view?usp=drivesdk
-      embedUrl: "https://drive.google.com/file/d/TUTAJ_TWÓJ_ID/preview"
+      embedUrl: "https://drive.google.com/file/d/1HQ92V19nlXWlauoRVC9ICXmlODhkqNsI/view?usp=drivesdk"
     }
   ]
 };
 
-let currentCategory = 'csi'; // Domyślnie pokaże zakładkę CSI
+let currentCategory = 'csi'; // Domyślna kategoria
 
 const moviesListContainer = document.getElementById('movies-list');
 const playerWrapper = document.getElementById('player-wrapper');
 const videoTitle = document.getElementById('video-title');
-
-// Przełączanie zakładek
-function switchCategory(category) {
-  currentCategory = category;
-  
-  // Zmiana aktywnego przycisku
-  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-
-  renderMovies();
-}
 
 // Wyświetlenie listy dla danej kategorii
 function renderMovies() {
@@ -51,7 +36,7 @@ function renderMovies() {
   const items = contentData[currentCategory] || [];
 
   if (items.length === 0) {
-    moviesListContainer.innerHTML = '<p>Brak wideo w tej kategorii.</p>';
+    moviesListContainer.innerHTML = '<p style="text-align:center; width:100%;">Brak wideo w tej kategorii.</p>';
     return;
   }
 
@@ -72,7 +57,23 @@ function renderMovies() {
   });
 }
 
-// Odtwarzanie wideo (obsługa odtwarzacza Google Drive)
+// Obsługa kliknięć w przyciski zakładek
+document.querySelectorAll('.nav-btn').forEach(button => {
+  button.addEventListener('click', (e) => {
+    // Usunięcie klasy 'active' ze wszystkich przycisków
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    
+    // Dodanie 'active' do klikniętego przycisku
+    e.target.classList.add('active');
+    
+    // Pobranie kategorii z atrybutu data-category
+    currentCategory = e.target.getAttribute('data-category');
+    
+    renderMovies();
+  });
+});
+
+// Odtwarzanie wideo
 function playMovie(item) {
   videoTitle.textContent = item.title;
   
@@ -91,5 +92,5 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Start
+// Pierwsze uruchomienie
 renderMovies();
