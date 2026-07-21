@@ -10,21 +10,28 @@
 
   <header>
     <h1>🎬 Nasze Domowe Kino</h1>
+    <!-- Menu z zakładkami -->
+    <nav class="categories">
+      <button class="nav-btn active" onclick="switchCategory('filmy')">Filmy</button>
+      <button class="nav-btn" onclick="switchCategory('csi')">CSI</button>
+    </nav>
   </header>
 
   <main>
     <!-- Główny Odtwarzacz -->
     <section class="player-container">
-      <h2 id="video-title">Wybierz film z listy poniżej</h2>
-      <video id="main-player" controls poster="https://via.placeholder.com/800x450?text=Wybierz+film">
-        <source id="video-source" src="" type="video/mp4">
-        Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-      </video>
+      <h2 id="video-title">Wybierz film lub odcinek z listy poniżej</h2>
+      <div id="player-wrapper">
+        <video id="main-player" controls poster="https://via.placeholder.com/800x450?text=Wybierz+film">
+          <source id="video-source" src="" type="video/mp4">
+          Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+        </video>
+      </div>
     </section>
 
-    <!-- Lista Filmów -->
+    <!-- Lista Filmów / Odcinków -->
     <section class="movies-grid" id="movies-list">
-      <!-- Karty filmów wygeneruje JavaScript -->
+      <!-- Generowane przez JavaScript -->
     </section>
   </main>
 
