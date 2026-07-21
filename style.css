@@ -89,3 +89,42 @@ header {
   background-color: #e50914; /* Czerwony kolor aktywnej zakładki */
   font-weight: bold;
 }
+/* Przycisk trybu kinowego i pełny ekran */
+.player-controls {
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+#theater-btn {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#theater-btn:hover {
+  background-color: #e50914;
+  border-color: #e50914;
+}
+
+#video-container.theater-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#video-container.theater-mode iframe {
+  height: 100vh !important;
+  border-radius: 0 !important;
+}
