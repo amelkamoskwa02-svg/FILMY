@@ -1,9 +1,7 @@
 // Baza danych
 const contentData = {
-  filmy: 
-    }
-        csi: [
-    {
+  filmy: [],
+  csi: [
       id: 9,
       title: "CSI: Odcinek 9",
       poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+9",
