@@ -8,18 +8,18 @@ const contentData = {
       embedUrl: "https://drive.google.com/file/d/TUTAJ_TWÓJ_ID/preview"
     }
   ],
-  csi: [
+csi: [
     {
       id: 101,
-      title: "CSI: Odcinek 21 VIPER ACR vs ROUTE 66! PART 2/2 - O kosmitach, kasynach i innych przygodach ",
-      poster: "https://via.placeholder.com/200x300?text=CSI+S01E01",
-      embedUrl: "https://drive.google.com/file/d/12lDZz7ry_D9f6b6YfuA8qDdzsY6q-QSB/view?usp=drivesdk"
+      title: "CSI: Odcinek 21 VIPER ACR vs ROUTE 66! PART 2_2",
+      poster: "https://via.placeholder.com/200x300?text=CSI+Odcinek+21",
+      embedUrl: "https://drive.google.com/file/d/12lDZz7ry_D9f6b6YfuA8qDdzsY6q-QSB/preview"
     },
     {
       id: 102,
-      title: "CSI: Odcinek22 Porsche 911 MANTA GT1 - caly projekt",
-      poster: "https://via.placeholder.com/200x300?text=CSI+S01E02",
-      embedUrl: "https://drive.google.com/file/d/1HQ92V19nlXWlauoRVC9ICXmlODhkqNsI/view?usp=drivesdk"
+      title: "CSI: Odcinek 22 Porsche 911 MANTA GT1 - caly projekt",
+      poster: "https://via.placeholder.com/200x300?text=CSI+Odcinek+22",
+      embedUrl: "https://drive.google.com/file/d/1HQ92V19nlXWlauoRVC9ICXmlODhkqNsI/preview"
     }
   ]
 };
