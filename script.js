@@ -146,8 +146,13 @@ function renderMovies() {
       card.classList.add('watched');
     }
 
+    // Pobierz zapisaną minutę dla tego konkretnego odcinka
+    const savedTime = localStorage.getItem(`time_${currentCategory}_${item.id}`);
+    const timeBadgeHtml = savedTime ? `<div class="time-badge">⏱ ${savedTime}</div>` : '';
+
     card.innerHTML = `
       <img src="${item.poster}" alt="${item.title}">
+      ${timeBadgeHtml}
       <div class="movie-info">
         <h3>${item.title}</h3>
       </div>
@@ -176,8 +181,10 @@ function playMovie(item) {
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
+  const timestampControls = document.getElementById('timestamp-controls');
+  const timeInput = document.getElementById('time-input');
 
-  // Zapisywanie postępu
+  // Zapisz odcinek jako ostatnio oglądany
   localStorage.setItem(`lastWatched_${currentCategory}`, item.id);
   renderMovies();
 
@@ -198,6 +205,13 @@ function playMovie(item) {
     `;
   }
 
+  // Wczytaj poprzednio zapisaną minutę do pola tekstowego (jeśli istnieje)
+  const savedTime = localStorage.getItem(`time_${currentCategory}_${item.id}`);
+  if (timeInput) {
+    timeInput.value = savedTime || '';
+  }
+
+  if (timestampControls) timestampControls.style.display = 'flex';
   if (closeBtn) closeBtn.style.display = 'inline-block';
   
   // Pokaż przycisk "Następny", jeśli istnieje kolejny odcinek
@@ -214,11 +228,36 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function saveTime() {
+  if (!currentPlayingItem) return;
+  const timeInput = document.getElementById('time-input');
+  if (!timeInput) return;
+
+  const value = timeInput.value.trim();
+  if (value) {
+    localStorage.setItem(`time_${currentCategory}_${currentPlayingItem.id}`, value);
+  } else {
+    localStorage.removeItem(`time_${currentCategory}_${currentPlayingItem.id}`);
+  }
+  renderMovies();
+  
+  // Mały wizualny efekt na przycisku po zapisaniu
+  const saveBtn = document.getElementById('save-time-btn');
+  if (saveBtn) {
+    const originalText = saveBtn.textContent;
+    saveBtn.textContent = "✔ Zapisano!";
+    setTimeout(() => {
+      saveBtn.textContent = originalText;
+    }, 1500);
+  }
+}
+
 function closePlayer() {
   const playerWrapper = document.getElementById('player-wrapper');
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
+  const timestampControls = document.getElementById('timestamp-controls');
 
   if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
   if (playerWrapper) {
@@ -226,6 +265,7 @@ function closePlayer() {
       <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+poni%C3%BCej" alt="Podgląd" id="placeholder-img">
     `;
   }
+  if (timestampControls) timestampControls.style.display = 'none';
   if (closeBtn) closeBtn.style.display = 'none';
   if (nextBtn) nextBtn.style.display = 'none';
   currentPlayingItem = null;
@@ -247,7 +287,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
+  const saveTimeBtn = document.getElementById('save-time-btn');
 
   if (closeBtn) closeBtn.addEventListener('click', closePlayer);
   if (nextBtn) nextBtn.addEventListener('click', playNextMovie);
+  if (saveTimeBtn) saveTimeBtn.addEventListener('click', saveTime);
 });
