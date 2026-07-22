@@ -13,13 +13,6 @@ body {
   padding-bottom: 40px;
 }
 
-/* Blokada skrolowania tła gdy aktywny jest tryb pełnoekranowy */
-body.no-scroll {
-  overflow: hidden !important;
-  height: 100vh !important;
-  touch-action: none !important;
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -41,14 +34,13 @@ header h1 {
   font-weight: 700;
 }
 
-/* --- ODTWARZACZ (TRYB NORMALNY) --- */
+/* --- ODTWARZACZ --- */
 .player-section {
   background: #1f1f1f;
   border-radius: 12px;
   padding: 15px;
   margin-bottom: 25px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  position: relative;
 }
 
 .player-header {
@@ -73,6 +65,7 @@ header h1 {
   flex-wrap: wrap;
 }
 
+/* Pole czasy / timestamp */
 #timestamp-controls input {
   background: #2b2b2b;
   border: 1px solid #444;
@@ -89,6 +82,7 @@ header h1 {
   border-color: #e50914;
 }
 
+/* Przyciski odtwarzacza */
 .player-btn {
   background: #333;
   color: #fff;
@@ -112,14 +106,6 @@ header h1 {
   transform: scale(0.96);
 }
 
-.open-btn {
-  background: #2e7d32;
-}
-
-.open-btn:hover {
-  background: #388e3c;
-}
-
 .close-btn {
   background: #c62828;
 }
@@ -132,7 +118,7 @@ header h1 {
 #player-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%; /* Proporcje 16:9 */
   height: 0;
   background: #000;
   border-radius: 8px;
@@ -237,74 +223,4 @@ header h1 {
   padding: 3px 6px;
   border-radius: 4px;
   font-weight: bold;
-}
-
-/* =========================================================
-   TRYB APLIKACJI / PEŁNY EKRAN NA TELEFONIE (ZABLOKOWANY WIDOK)
-   ========================================================= */
-.player-section.is-fullscreen {
-  position: fixed !important;
-  inset: 0 !important; /* Rozciąga na 100% ekranu telefonu */
-  width: 100vw !important;
-  height: 100vh !important;
-  height: -webkit-fill-available !important;
-  z-index: 9999999 !important;
-  background: #000000 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  overflow: hidden !important;
-  touch-action: none !important;
-}
-
-/* Ukrywamy CAŁY nagłówek z tytułem i zbędnymi przyciskami ze strony */
-.player-section.is-fullscreen .player-header h2,
-.player-section.is-fullscreen #timestamp-controls,
-.player-section.is-fullscreen #open-drive-btn,
-.player-section.is-fullscreen #next-btn,
-.player-section.is-fullscreen #fullscreen-btn {
-  display: none !important;
-}
-
-/* Tylko i wyłącznie pływający przycisk X */
-.player-section.is-fullscreen .player-header {
-  position: absolute !important;
-  top: 12px !important;
-  right: 12px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  z-index: 10000000 !important;
-}
-
-.player-section.is-fullscreen #close-btn {
-  display: flex !important;
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50% !important;
-  background: rgba(0, 0, 0, 0.75) !important;
-  color: #ffffff !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
-  font-size: 18px !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6) !important;
-}
-
-/* Wideo w 100% wypełnia ekran bez nakładania marginesów */
-.player-section.is-fullscreen #player-wrapper {
-  width: 100% !important;
-  height: 100% !important;
-  padding-bottom: 0 !important;
-  border-radius: 0 !important;
-  background: #000 !important;
-}
-
-.player-section.is-fullscreen iframe {
-  width: 100% !important;
-  height: 100% !important;
-  border: none !important;
 }
