@@ -8,31 +8,45 @@
 </head>
 <body>
 
-  <!-- Nawigacja / Zakładki -->
-  <nav class="navbar">
-    <div class="logo">FILMY</div>
-    <div class="categories">
-      <button class="category-btn" data-category="filmy">Filmy</button>
-      <button class="category-btn active" data-category="csi">CSI</button>
-      <button class="category-btn" data-category="serial1670_s1">1670 (Sezon 1)</button>
-      <button class="category-btn" data-category="serial1670_s2">1670 (Sezon 2)</button>
-    </div>
-  </nav>
+  <header>
+    <h1>Moje Filmy i Seriale</h1>
+  </header>
 
-  <!-- Odtwarzacz Wideo -->
-  <section class="player-section">
-  <div class="player-header">
-    <h2 id="video-title">Wybierz film lub odcinek</h2>
-    <div class="player-controls">
-      <div id="timestamp-controls" style="display: none; align-items: center; gap: 6px; margin-right: 10px;">
-        <input type="text" id="time-input" placeholder="np. 12:30" style="width: 75px; padding: 6px 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 13px; text-align: center; outline: none;">
-        <button id="save-time-btn" class="player-btn" title="Zapisz minutę">💾 Zapisz minutę</button>
+  <main class="container">
+    <!-- Odtwarzacz -->
+    <section class="player-section">
+      <div class="player-header">
+        <h2 id="video-title">Wybierz film lub odcinek</h2>
+        <div class="player-controls">
+          <div id="timestamp-controls" style="display: none; align-items: center; gap: 6px; margin-right: 10px;">
+            <input type="text" id="time-input" placeholder="np. 12:30" style="width: 75px; padding: 6px 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 13px; text-align: center; outline: none;">
+            <button id="save-time-btn" class="player-btn" title="Zapisz minutę">💾 Zapisz minutę</button>
+          </div>
+          <button id="next-btn" class="player-btn" style="display: none;" title="Następny odcinek">Następny ⏭</button>
+          <button id="close-btn" class="player-btn close-btn" style="display: none;" title="Zamknij odtwarzacz">✕</button>
+        </div>
       </div>
-      <button id="next-btn" class="player-btn" style="display: none;" title="Następny odcinek">Następny ⏭</button>
-      <button id="close-btn" class="player-btn close-btn" style="display: none;" title="Zamknij odtwarzacz">✕</button>
-    </div>
-  </div>
-  <div id="player-wrapper">
-    <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
-  </div>
-</section>
+      <div id="player-wrapper">
+        <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
+      </div>
+    </section>
+
+    <!-- Kategorie -->
+    <section class="categories-section">
+      <div class="categories">
+        <button class="category-btn" data-category="filmy">Filmy</button>
+        <button class="category-btn active" data-category="csi">CSI</button>
+        <button class="category-btn" data-category="serial1670_s1">1670 (Sezon 1)</button>
+        <button class="category-btn" data-category="serial1670_s2">1670 (Sezon 2)</button>
+      </div>
+    </section>
+
+    <!-- Lista filmów/odcinków -->
+    <section class="movies-section">
+      <div id="movies-grid" class="movies-grid"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
