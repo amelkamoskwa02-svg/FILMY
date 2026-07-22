@@ -265,11 +265,16 @@ function playMovie(item) {
 }
 
 function closePlayer() {
+  const playerSection = document.getElementById('player-section');
   const playerWrapper = document.getElementById('player-wrapper');
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
   const timestampControls = document.getElementById('timestamp-controls');
+  const mobileFullscreenBtn = document.getElementById('mobile-fullscreen-btn');
+
+  if (playerSection) playerSection.classList.remove('is-fullscreen-mobile');
+  if (mobileFullscreenBtn) mobileFullscreenBtn.textContent = "📱 Pełny ekran";
 
   if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
   if (playerWrapper) {
@@ -281,6 +286,19 @@ function closePlayer() {
   if (closeBtn) closeBtn.style.display = 'none';
   if (nextBtn) nextBtn.style.display = 'none';
   currentPlayingItem = null;
+}
+
+function toggleMobileFullscreen() {
+  const playerSection = document.getElementById('player-section');
+  const mobileFullscreenBtn = document.getElementById('mobile-fullscreen-btn');
+  if (!playerSection) return;
+
+  playerSection.classList.toggle('is-fullscreen-mobile');
+  const isFullscreen = playerSection.classList.contains('is-fullscreen-mobile');
+  
+  if (mobileFullscreenBtn) {
+    mobileFullscreenBtn.textContent = isFullscreen ? "📉 Zwiń" : "📱 Pełny ekran";
+  }
 }
 
 function saveTime() {
@@ -323,8 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
   const saveTimeBtn = document.getElementById('save-time-btn');
+  const mobileFullscreenBtn = document.getElementById('mobile-fullscreen-btn');
 
   if (closeBtn) closeBtn.addEventListener('click', closePlayer);
   if (nextBtn) nextBtn.addEventListener('click', playNextMovie);
   if (saveTimeBtn) saveTimeBtn.addEventListener('click', saveTime);
+  if (mobileFullscreenBtn) mobileFullscreenBtn.addEventListener('click', toggleMobileFullscreen);
 });
