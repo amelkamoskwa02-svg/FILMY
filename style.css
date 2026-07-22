@@ -5,275 +5,180 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #141414;
   color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
 }
 
 header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
-.player-container {
-  max-width: 900px;
-  margin: 0 auto 40px auto;
-  text-align: center;
+header h1 {
+  font-size: 2rem;
+  color: #e50914;
 }
 
-#main-player {
-  width: 100%;
-  max-height: 500px;
-  border-radius: 12px;
-  background-color: #000;
-  margin-top: 15px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-}
-
-.movies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
+.container {
+  max-width: 1000px;
   margin: 0 auto;
 }
 
+/* Sekcja Odtwarzacza */
+.player-section {
+  background: #000;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.player-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+}
+
+.player-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.close-btn {
+  background: #e50914;
+}
+
+.close-btn:hover {
+  background: #b80710;
+}
+
+#player-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#player-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#player-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Kategorie */
+.categories-section {
+  margin-bottom: 20px;
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  background: #222;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.category-btn:hover, .category-btn.active {
+  background: #e50914;
+  border-color: #e50914;
+}
+
+/* Siatka filmów */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+}
+
 .movie-card {
-  background-color: #1f1f1f;
+  background: #1f1f1f;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .movie-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(229, 9, 20, 0.4);
+  box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
+}
+
+.movie-card.watched {
+  border: 2px solid #e50914;
 }
 
 .movie-card img {
   width: 100%;
-  height: 280px;
+  height: 220px;
   object-fit: cover;
+  display: block;
 }
 
-.movie-card h3 {
-  padding: 12px;
-  font-size: 1rem;
-  text-align: center;
-}
-.categories {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 15px;
+.movie-info {
+  padding: 10px;
 }
 
-.nav-btn {
-  background-color: #2b2b2b;
-  color: white;
-  border: none;
-  padding: 10px 24px;
-  font-size: 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+.movie-info h3 {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
-.nav-btn:hover {
-  background-color: #444;
-}
-
-.nav-btn.active {
-  background-color: #e50914; /* Czerwony kolor aktywnej zakładki */
-  font-weight: bold;
-}
-/* Przycisk trybu kinowego i pełny ekran */
-.player-controls {
-  margin-bottom: 10px;
-  text-align: right;
-}
-
-#theater-btn {
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #555;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-
-#theater-btn:hover {
-  background-color: #e50914;
-  border-color: #e50914;
-}
-
-#video-container.theater-mode {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9999;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#video-container.theater-mode iframe {
-  height: 100vh !important;
-  border-radius: 0 !important;
-}
-/* Nowoczesny styl paska nawigacji */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 30px;
-  background: rgba(18, 18, 18, 0.95);
-  backdrop-filter: blur(10px);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Kontener na przyciski */
-.categories {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* Styl pojedynczego przycisku */
-.category-btn {
-  background: rgba(255, 255, 255, 0.08);
-  color: #cccccc;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 10px 20px;
-  border-radius: 25px; /* Okrągłe krawędzie w stylu pigułki */
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  outline: none;
-}
-
-/* Efekt po najechaniu myszką (Hover) */
-.category-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px); /* Lekkie uniesienie */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Styl AKTYWNEJ zakładki (wybranej) */
-.category-btn.active {
-  background: #e50914; /* Czerwień w stylu Netflixa */
-  color: #ffffff;
-  border-color: #e50914;
-  box-shadow: 0 0 15px rgba(229, 9, 20, 0.5); /* Czerwona poświata */
-}
-/* Zmniejszenie sekcji odtwarzacza, aby lista pod spodem była od razu widoczna */
-.player-section {
-  max-width: 650px !important; /* Zmniejsza szerokość sekcji odtwarzacza */
-  margin: 0 auto 30px auto !important; /* Środkuje odtwarzacz i dodaje odstęp od dołu */
-}
-
-/* Zmniejszenie samej ramki wideo / podglądu */
-#player-wrapper, #video-container iframe, #video-container img {
-  max-height: 360px !important; /* Ogranicza wysokość, by odtwarzacz nie był za duży */
-  object-fit: cover !important;
-}
-/* Nagłówek odtwarzacza i przyciski sterowania */
-.player-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  margin-bottom: 12px !important;
-  gap: 10px !important;
-}
-
-.player-controls {
-  display: flex !important;
-  gap: 8px !important;
-  align-items: center !important;
-}
-
-.player-btn {
-  background: rgba(255, 255, 255, 0.15) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  padding: 8px 14px !important;
-  border-radius: 20px !important;
-  cursor: pointer !important;
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  transition: all 0.2s ease !important;
-}
-
-.player-btn:hover {
-  background: #e50914 !important;
-  border-color: #e50914 !important;
-  transform: scale(1.05) !important;
-}
-
-.close-btn {
-  background: rgba(229, 9, 20, 0.3) !important;
-  border-color: rgba(229, 9, 20, 0.5) !important;
-}
-
-/* Oznaczenie ostatnio oglądanego odcinka */
-.movie-card.watched {
-  border: 2px solid #e50914 !important;
-  position: relative !important;
-}
-
-.movie-card.watched::after {
-  content: "Ostatnio oglądane" !important;
-  position: absolute !important;
-  top: 8px !important;
-  right: 8px !important;
-  background: #e50914 !important;
-  color: #fff !important;
-  font-size: 10px !important;
-  padding: 3px 6px !important;
-  border-radius: 4px !important;
-  font-weight: bold !important;
-}
-/* Poprawka nakładania się przycisku zamknij na ikonę Google Drive */
-.player-section {
-  position: relative !important;
-}
-
-.player-header {
-  position: relative !important;
-  z-index: 10 !important;
-  margin-bottom: 15px !important; /* Daje odstęp między przyciskami a filmem */
-}
-
-#player-wrapper {
-  position: relative !important;
-  z-index: 1 !important;
-  margin-top: 10px !important;
-}
-/* Etykieta z zapisaną minutą na kafelku */
 .time-badge {
-  position: absolute !important;
-  bottom: 8px !important;
-  left: 8px !important;
-  background: rgba(0, 0, 0, 0.85) !important;
-  color: #e50914 !important;
-  border: 1px solid #e50914 !important;
-  font-size: 11px !important;
-  padding: 3px 8px !important;
-  border-radius: 6px !important;
-  font-weight: bold !important;
-  z-index: 2 !important;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 3px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
