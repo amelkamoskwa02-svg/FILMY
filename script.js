@@ -152,7 +152,6 @@ function renderMovies() {
       card.classList.add('watched');
     }
 
-    // Pobierz zapisaną minutę dla tego konkretnego odcinka
     const savedTime = localStorage.getItem(`time_${currentCategory}_${item.id}`);
     const timeBadgeHtml = savedTime ? `<div class="time-badge">⏱ ${savedTime}</div>` : '';
 
@@ -187,10 +186,10 @@ function playMovie(item) {
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
+  const castBtn = document.getElementById('cast-btn');
   const timestampControls = document.getElementById('timestamp-controls');
   const timeInput = document.getElementById('time-input');
 
-  // Zapisz odcinek jako ostatnio oglądany
   localStorage.setItem(`lastWatched_${currentCategory}`, item.id);
   renderMovies();
 
@@ -211,16 +210,15 @@ function playMovie(item) {
     `;
   }
 
-  // Wczytaj poprzednio zapisaną minutę do pola tekstowego (jeśli istnieje)
   const savedTime = localStorage.getItem(`time_${currentCategory}_${item.id}`);
   if (timeInput) {
     timeInput.value = savedTime || '';
   }
 
   if (timestampControls) timestampControls.style.display = 'flex';
+  if (castBtn) castBtn.style.display = 'inline-block';
   if (closeBtn) closeBtn.style.display = 'inline-block';
   
-  // Pokaż przycisk "Następny", jeśli istnieje kolejny odcinek
   const currentList = contentData[currentCategory] || [];
   const currentIndex = currentList.findIndex(x => x.id === item.id);
   if (nextBtn) {
@@ -247,7 +245,6 @@ function saveTime() {
   }
   renderMovies();
   
-  // Mały wizualny efekt na przycisku po zapisaniu
   const saveBtn = document.getElementById('save-time-btn');
   if (saveBtn) {
     const originalText = saveBtn.textContent;
@@ -258,11 +255,19 @@ function saveTime() {
   }
 }
 
+function openForTV() {
+  if (!currentPlayingItem || !currentPlayingItem.embedUrl) return;
+  // Zastępuje '/preview' na '/view', aby otworzyć pełny player Google Drive w nowym oknie
+  const fullUrl = currentPlayingItem.embedUrl.replace('/preview', '/view');
+  window.open(fullUrl, '_blank');
+}
+
 function closePlayer() {
   const playerWrapper = document.getElementById('player-wrapper');
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
+  const castBtn = document.getElementById('cast-btn');
   const timestampControls = document.getElementById('timestamp-controls');
 
   if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
@@ -272,6 +277,7 @@ function closePlayer() {
     `;
   }
   if (timestampControls) timestampControls.style.display = 'none';
+  if (castBtn) castBtn.style.display = 'none';
   if (closeBtn) closeBtn.style.display = 'none';
   if (nextBtn) nextBtn.style.display = 'none';
   currentPlayingItem = null;
@@ -293,9 +299,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
+  const castBtn = document.getElementById('cast-btn');
   const saveTimeBtn = document.getElementById('save-time-btn');
 
   if (closeBtn) closeBtn.addEventListener('click', closePlayer);
   if (nextBtn) nextBtn.addEventListener('click', playNextMovie);
+  if (castBtn) castBtn.addEventListener('click', openForTV);
   if (saveTimeBtn) saveTimeBtn.addEventListener('click', saveTime);
 });
