@@ -20,8 +20,7 @@
   </nav>
 
   <!-- Odtwarzacz Wideo -->
-  <main class="container">
-<section class="player-section">
+  <section class="player-section">
   <div class="player-header">
     <h2 id="video-title">Wybierz film lub odcinek</h2>
     <div class="player-controls">
@@ -29,22 +28,11 @@
         <input type="text" id="time-input" placeholder="np. 12:30" style="width: 75px; padding: 6px 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 13px; text-align: center; outline: none;">
         <button id="save-time-btn" class="player-btn" title="Zapisz minutę">💾 Zapisz minutę</button>
       </div>
-      <button id="cast-btn" class="player-btn" style="display: none;" title="Otwórz w pełnym oknie / przesyłanie na TV">📺 Na TV</button>
       <button id="next-btn" class="player-btn" style="display: none;" title="Następny odcinek">Następny ⏭</button>
       <button id="close-btn" class="player-btn close-btn" style="display: none;" title="Zamknij odtwarzacz">✕</button>
     </div>
   </div>
   <div id="player-wrapper">
-    <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+poni%C3%BCej" alt="Podgląd" id="placeholder-img">
+    <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
   </div>
 </section>
-    <!-- Siatka z kafelkami -->
-    <section class="movies-section">
-      <h2>Lista Odcinków</h2>
-      <div id="movies-grid" class="movies-grid"></div>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
