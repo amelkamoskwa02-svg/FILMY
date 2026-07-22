@@ -179,3 +179,14 @@ header {
   border-color: #e50914;
   box-shadow: 0 0 15px rgba(229, 9, 20, 0.5); /* Czerwona poświata */
 }
+/* Zmniejszenie sekcji odtwarzacza, aby lista pod spodem była od razu widoczna */
+.player-section {
+  max-width: 650px !important; /* Zmniejsza szerokość sekcji odtwarzacza */
+  margin: 0 auto 30px auto !important; /* Środkuje odtwarzacz i dodaje odstęp od dołu */
+}
+
+/* Zmniejszenie samej ramki wideo / podglądu */
+#player-wrapper, #video-container iframe, #video-container img {
+  max-height: 360px !important; /* Ogranicza wysokość, by odtwarzacz nie był za duży */
+  object-fit: cover !important;
+}
