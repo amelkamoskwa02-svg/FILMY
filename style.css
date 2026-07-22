@@ -128,3 +128,54 @@ header {
   height: 100vh !important;
   border-radius: 0 !important;
 }
+/* Nowoczesny styl paska nawigacji */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Kontener na przyciski */
+.categories {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Styl pojedynczego przycisku */
+.category-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cccccc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: 25px; /* Okrągłe krawędzie w stylu pigułki */
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+/* Efekt po najechaniu myszką (Hover) */
+.category-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px); /* Lekkie uniesienie */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Styl AKTYWNEJ zakładki (wybranej) */
+.category-btn.active {
+  background: #e50914; /* Czerwień w stylu Netflixa */
+  color: #ffffff;
+  border-color: #e50914;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.5); /* Czerwona poświata */
+}
