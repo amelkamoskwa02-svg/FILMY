@@ -251,7 +251,7 @@ function playMovie(item) {
   if (timestampControls) timestampControls.style.display = 'flex';
   if (closeBtn) closeBtn.style.display = 'inline-flex';
   if (fullscreenBtn) fullscreenBtn.style.display = 'inline-flex';
-  
+
   const currentList = contentData[currentCategory] || [];
   const currentIndex = currentList.findIndex(x => x.id === item.id);
   if (nextBtn) {
@@ -265,72 +265,21 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Funkcja otwierająca/zamykająca Pełny Ekran z blokadą strony w tle
-function toggleFullscreen() {
-  const playerSection = document.querySelector('.player-section');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-  if (!playerSection) return;
-
-  if (!playerSection.classList.contains('is-fullscreen')) {
-    playerSection.classList.add('is-fullscreen');
-    document.body.classList.add('no-scroll'); // Dodaje całkowitą blokadę przewijania tła
-    if (fullscreenBtn) fullscreenBtn.textContent = '✕ Wyjdź';
-  } else {
-    exitFullscreen();
+// Otwieranie bezpośrendiego odtwarzacza systemowego iOS/Android bez paska adresu i bez podwójnych pasków postępu
+function toggleFullscreen(e) {
+  if (e) e.preventDefault();
+  
+  if (!currentPlayingItem || !currentPlayingItem.embedUrl) {
+    alert("Wybierz najpierw wideo!");
+    return;
   }
-}
 
-function exitFullscreen() {
-  const playerSection = document.querySelector('.player-section');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-  if (playerSection && playerSection.classList.contains('is-fullscreen')) {
-    playerSection.classList.remove('is-fullscreen');
-    document.body.classList.remove('no-scroll'); // Zdejmowanie blokady
-    if (fullscreenBtn) fullscreenBtn.textContent = '⛶ Pełny ekran';
-  }
+  // Podmiana /preview na /view odpala fabryczny odtwarzacz pełnoekranowy na telefonie
+  const directUrl = currentPlayingItem.embedUrl.replace('/preview', '/view');
+  window.open(directUrl, '_blank');
 }
 
 function closePlayer() {
-  exitFullscreen();
-
-  const playerWrapper = document.getElementById('player-wrapper');
-  const videoTitle = document.getElementById('video-title');
-  const closeBtn = document.getElementById('close-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
-  const openDriveBtn = document.getElementById('open-drive-btn');
-  const timestampControls = document.getElementById('timestamp-controls');
-
-  if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
-  if (playerWrapper) {
-    playerWrapper.innerHTML = `
-      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
-    `;
-  }
-  if (timestampControls) timestampControls.style.display = 'none';
-  if (closeBtn) closeBtn.style.display = 'none';
-  if (nextBtn) nextBtn.style.display = 'none';
-  if (fullscreenBtn) fullscreenBtn.style.display = 'none';
-  if (openDriveBtn) openDriveBtn.style.display = 'none';
-  currentPlayingItem = null;
-}
-
-function exitFullscreen() {
-  const playerSection = document.querySelector('.player-section');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-  if (playerSection && playerSection.classList.contains('is-fullscreen')) {
-    playerSection.classList.remove('is-fullscreen');
-    document.body.style.overflow = '';
-    if (fullscreenBtn) fullscreenBtn.textContent = '⛶ Pełny ekran';
-  }
-}
-
-function closePlayer() {
-  exitFullscreen();
-
   const playerWrapper = document.getElementById('player-wrapper');
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
