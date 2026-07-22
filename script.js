@@ -123,6 +123,7 @@ const contentData = {
 };
 
 let currentCategory = 'csi';
+let currentPlayingItem = null;
 
 function renderMovies() {
   const moviesGrid = document.getElementById('movies-grid');
@@ -130,6 +131,7 @@ function renderMovies() {
 
   moviesGrid.innerHTML = '';
   const currentList = contentData[currentCategory] || [];
+  const lastWatchedId = localStorage.getItem(`lastWatched_${currentCategory}`);
 
   if (currentList.length === 0) {
     moviesGrid.innerHTML = '<p style="color: #888; text-align: center; grid-column: 1/-1;">Brak odcinków w tej kategorii.</p>';
@@ -139,6 +141,11 @@ function renderMovies() {
   currentList.forEach(item => {
     const card = document.createElement('div');
     card.classList.add('movie-card');
+
+    if (lastWatchedId && item.id.toString() === lastWatchedId.toString()) {
+      card.classList.add('watched');
+    }
+
     card.innerHTML = `
       <img src="${item.poster}" alt="${item.title}">
       <div class="movie-info">
@@ -164,8 +171,15 @@ function initCategoryButtons() {
 }
 
 function playMovie(item) {
+  currentPlayingItem = item;
   const playerWrapper = document.getElementById('player-wrapper');
   const videoTitle = document.getElementById('video-title');
+  const closeBtn = document.getElementById('close-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  // Zapisywanie postępu
+  localStorage.setItem(`lastWatched_${currentCategory}`, item.id);
+  renderMovies();
 
   if (videoTitle) videoTitle.textContent = item.title;
   
@@ -184,10 +198,56 @@ function playMovie(item) {
     `;
   }
 
+  if (closeBtn) closeBtn.style.display = 'inline-block';
+  
+  // Pokaż przycisk "Następny", jeśli istnieje kolejny odcinek
+  const currentList = contentData[currentCategory] || [];
+  const currentIndex = currentList.findIndex(x => x.id === item.id);
+  if (nextBtn) {
+    if (currentIndex !== -1 && currentIndex < currentList.length - 1) {
+      nextBtn.style.display = 'inline-block';
+    } else {
+      nextBtn.style.display = 'none';
+    }
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closePlayer() {
+  const playerWrapper = document.getElementById('player-wrapper');
+  const videoTitle = document.getElementById('video-title');
+  const closeBtn = document.getElementById('close-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
+  if (playerWrapper) {
+    playerWrapper.innerHTML = `
+      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+poni%C3%BCej" alt="Podgląd" id="placeholder-img">
+    `;
+  }
+  if (closeBtn) closeBtn.style.display = 'none';
+  if (nextBtn) nextBtn.style.display = 'none';
+  currentPlayingItem = null;
+}
+
+function playNextMovie() {
+  if (!currentPlayingItem) return;
+  const currentList = contentData[currentCategory] || [];
+  const currentIndex = currentList.findIndex(x => x.id === currentPlayingItem.id);
+
+  if (currentIndex !== -1 && currentIndex < currentList.length - 1) {
+    playMovie(currentList[currentIndex + 1]);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   initCategoryButtons();
   renderMovies();
+
+  const closeBtn = document.getElementById('close-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  if (closeBtn) closeBtn.addEventListener('click', closePlayer);
+  if (nextBtn) nextBtn.addEventListener('click', playNextMovie);
 });
