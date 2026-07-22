@@ -77,6 +77,12 @@ const contentData = {
   ],
   serial1670_s1: [
     {
+      id: 1,
+      title: "1670: Sezon 1 - Odcinek 1",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S01E01",
+      embedUrl: "https://drive.google.com/file/d/1LfB3BWA3i-Xx--ESMiUZTPUK9Z6l-oQY/preview"
+    },
+    {
       id: 2,
       title: "1670: Sezon 1 - Odcinek 2",
       poster: "https://placehold.co/200x300/111111/e50914?text=1670+S01E02",
