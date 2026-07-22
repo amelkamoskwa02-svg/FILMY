@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Moje Filmy i Seriale</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -18,11 +18,12 @@
       <div class="player-header">
         <h2 id="video-title">Wybierz film lub odcinek</h2>
         <div class="player-controls">
-          <div id="timestamp-controls" style="display: none; align-items: center; gap: 6px; margin-right: 10px;">
-            <input type="text" id="time-input" placeholder="np. 12:30" style="width: 75px; padding: 6px 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 13px; text-align: center; outline: none;">
-            <button id="save-time-btn" class="player-btn" title="Zapisz minutę">💾 Zapisz minutę</button>
+          <div id="timestamp-controls" style="display: none; align-items: center; gap: 6px;">
+            <input type="text" id="time-input" placeholder="np. 12:30">
+            <button id="save-time-btn" class="player-btn" title="Zapisz minutę">💾 Zapisz</button>
           </div>
-          <button id="next-btn" class="player-btn" style="display: none;" title="Następny odcinek">Następny ⏭</button>
+          <button id="fullscreen-btn" class="player-btn open-btn" style="display: none;" title="Pełny ekran">⛶ Pełny ekran</button>
+          <button id="next-btn" class="player-btn" style="display: none;" title="Następny odcinek">⏭</button>
           <button id="close-btn" class="player-btn close-btn" style="display: none;" title="Zamknij odtwarzacz">✕</button>
         </div>
       </div>
