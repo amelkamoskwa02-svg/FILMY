@@ -264,25 +264,11 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function toggleFullscreen() {
-  const playerWrapper = document.getElementById('player-wrapper');
-  if (!playerWrapper) return;
-
-  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (playerWrapper.requestFullscreen) {
-      playerWrapper.requestFullscreen();
-    } else if (playerWrapper.webkitRequestFullscreen) {
-      playerWrapper.webkitRequestFullscreen();
-    } else if (playerWrapper.msRequestFullscreen) {
-      playerWrapper.msRequestFullscreen();
-    }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
-  }
+function openFullscreenMobile() {
+  if (!currentPlayingItem || !currentPlayingItem.embedUrl) return;
+  // Przekierowuje bezpośrednio do odtwarzacza wideo Google Drive, omijając blokady przeglądarek
+  const directUrl = currentPlayingItem.embedUrl.replace('/preview', '/view');
+  window.open(directUrl, '_blank');
 }
 
 function saveTime() {
@@ -350,6 +336,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (closeBtn) closeBtn.addEventListener('click', closePlayer);
   if (nextBtn) nextBtn.addEventListener('click', playNextMovie);
-  if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+  if (fullscreenBtn) fullscreenBtn.addEventListener('click', openFullscreenMobile);
   if (saveTimeBtn) saveTimeBtn.addEventListener('click', saveTime);
 });
