@@ -224,7 +224,6 @@ function playMovie(item) {
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
   const timestampControls = document.getElementById('timestamp-controls');
   const timeInput = document.getElementById('time-input');
 
@@ -251,7 +250,6 @@ function playMovie(item) {
 
   if (timestampControls) timestampControls.style.display = 'flex';
   if (closeBtn) closeBtn.style.display = 'inline-flex';
-  if (fullscreenBtn) fullscreenBtn.style.display = 'inline-flex';
 
   const currentList = contentData[currentCategory] || [];
   const currentIndex = currentList.findIndex(x => x.id === item.id);
@@ -266,33 +264,11 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Mechanizm identyczny jak na komputerze: włącza natywny tryb pełnoekranowy przeglądarki
-function toggleFullscreen(e) {
-  if (e) e.preventDefault();
-
-  const playerSection = document.querySelector('.player-section');
-  const iframe = document.getElementById('video-iframe');
-  
-  // Próba odpalenia natywnego pełnego ekranu dla ramki wideo
-  const elem = iframe || playerSection;
-
-  if (elem) {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari / iOS */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
-    }
-  }
-}
-
 function closePlayer() {
   const playerWrapper = document.getElementById('player-wrapper');
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
   const timestampControls = document.getElementById('timestamp-controls');
 
   if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
@@ -304,7 +280,6 @@ function closePlayer() {
   if (timestampControls) timestampControls.style.display = 'none';
   if (closeBtn) closeBtn.style.display = 'none';
   if (nextBtn) nextBtn.style.display = 'none';
-  if (fullscreenBtn) fullscreenBtn.style.display = 'none';
   currentPlayingItem = null;
 }
 
@@ -347,11 +322,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
   const saveTimeBtn = document.getElementById('save-time-btn');
 
   if (closeBtn) closeBtn.addEventListener('click', closePlayer);
   if (nextBtn) nextBtn.addEventListener('click', playNextMovie);
-  if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
   if (saveTimeBtn) saveTimeBtn.addEventListener('click', saveTime);
 });
