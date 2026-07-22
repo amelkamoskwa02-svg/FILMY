@@ -236,6 +236,7 @@ function playMovie(item) {
   if (playerWrapper && item.embedUrl) {
     playerWrapper.innerHTML = `
       <iframe 
+        id="video-iframe"
         src="${item.embedUrl}" 
         allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
         allowfullscreen>
@@ -265,18 +266,25 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Otwieranie bezpośrendiego odtwarzacza systemowego iOS/Android bez paska adresu i bez podwójnych pasków postępu
+// Mechanizm identyczny jak na komputerze: włącza natywny tryb pełnoekranowy przeglądarki
 function toggleFullscreen(e) {
   if (e) e.preventDefault();
-  
-  if (!currentPlayingItem || !currentPlayingItem.embedUrl) {
-    alert("Wybierz najpierw wideo!");
-    return;
-  }
 
-  // Podmiana /preview na /view odpala fabryczny odtwarzacz pełnoekranowy na telefonie
-  const directUrl = currentPlayingItem.embedUrl.replace('/preview', '/view');
-  window.open(directUrl, '_blank');
+  const playerSection = document.querySelector('.player-section');
+  const iframe = document.getElementById('video-iframe');
+  
+  // Próba odpalenia natywnego pełnego ekranu dla ramki wideo
+  const elem = iframe || playerSection;
+
+  if (elem) {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari / iOS */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
 }
 
 function closePlayer() {
