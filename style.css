@@ -41,6 +41,7 @@ header h1 {
   padding: 15px;
   margin-bottom: 25px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 }
 
 .player-header {
@@ -65,7 +66,12 @@ header h1 {
   flex-wrap: wrap;
 }
 
-/* Pole czasy / timestamp */
+/* Domyślnie elementy z klasą mobile-only są ukryte (widoczne tylko na telefonach) */
+.mobile-only {
+  display: none !important;
+}
+
+/* Pole czasów / timestamp */
 #timestamp-controls input {
   background: #2b2b2b;
   border: 1px solid #444;
@@ -112,6 +118,14 @@ header h1 {
 
 .close-btn:hover {
   background: #d32f2f;
+}
+
+#mobile-fullscreen-btn {
+  background: #0277bd;
+}
+
+#mobile-fullscreen-btn:hover {
+  background: #01579b;
 }
 
 /* Ramka z wideo */
@@ -223,4 +237,42 @@ header h1 {
   padding: 3px 6px;
   border-radius: 4px;
   font-weight: bold;
+}
+
+/* --- OBSŁUGA SMARTFONÓW / URZĄDZEŃ MOBILNYCH (ekrany do 768px) --- */
+@media (max-width: 768px) {
+  /* Pokazujemy przycisk przeznaczony dla telefonu */
+  .mobile-only {
+    display: inline-flex !important;
+  }
+
+  /* Aktywny tryb pełnoekranowego okna na smartfonie po kliknięciu przycisku */
+  .player-section.is-fullscreen-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    border-radius: 0;
+    margin: 0;
+    padding: 10px;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .player-section.is-fullscreen-mobile #player-wrapper {
+    flex: 1;
+    height: auto;
+    padding-bottom: 0;
+  }
+
+  .player-section.is-fullscreen-mobile .player-header h2 {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 45vw;
+  }
 }
