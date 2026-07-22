@@ -92,30 +92,17 @@ const contentData = {
   serial1670_s2: []
 };
 
-// Automatyczne szukanie elementu siatki w HTML
-const moviesGrid = document.getElementById('movies-grid') || 
-                   document.getElementById('movies-container') || 
-                   document.querySelector('.movies-grid') || 
-                   document.querySelector('.movie-grid');
-
-const playerWrapper = document.getElementById('player-wrapper');
-const videoTitle = document.getElementById('video-title');
-const categoryButtons = document.querySelectorAll('.category-btn');
-
 let currentCategory = 'csi';
 
-// Funkcja renderująca listę kafelków
 function renderMovies() {
-  if (!moviesGrid) {
-    console.error("BŁĄD: Nie znaleziono kontenera na filmy w pliku HTML!");
-    return;
-  }
+  const moviesGrid = document.getElementById('movies-grid');
+  if (!moviesGrid) return;
 
   moviesGrid.innerHTML = '';
   const currentList = contentData[currentCategory] || [];
 
   if (currentList.length === 0) {
-    moviesGrid.innerHTML = '<p style="color: #888; text-align: center; grid-column: 1/-1;">Brak filmów/odcinków w tej kategorii.</p>';
+    moviesGrid.innerHTML = '<p style="color: #888; text-align: center; grid-column: 1/-1;">Brak odcinków w tej kategorii.</p>';
     return;
   }
 
@@ -133,30 +120,27 @@ function renderMovies() {
   });
 }
 
-// Podpięcie przycisków kategorii/zakładek
-categoryButtons.forEach(button => {
-  button.addEventListener('click', (e) => {
-    categoryButtons.forEach(btn => btn.classList.remove('active'));
-    e.target.classList.add('active');
+function initCategoryButtons() {
+  const categoryButtons = document.querySelectorAll('.category-btn');
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      categoryButtons.forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
 
-    currentCategory = e.target.getAttribute('data-category');
-    renderMovies();
+      currentCategory = e.target.getAttribute('data-category');
+      renderMovies();
+    });
   });
-});
+}
 
-// Odtwarzanie wideo
 function playMovie(item) {
-  if (!playerWrapper) return;
+  const playerWrapper = document.getElementById('player-wrapper');
+  const videoTitle = document.getElementById('video-title');
 
-  if (videoTitle) {
-    videoTitle.textContent = item.title;
-  }
+  if (videoTitle) videoTitle.textContent = item.title;
   
-  if (item.embedUrl) {
+  if (playerWrapper && item.embedUrl) {
     playerWrapper.innerHTML = `
-      <div class="player-controls">
-        <button id="theater-btn" onclick="toggleTheater()">📺 Pełny ekran na stronie</button>
-      </div>
       <div id="video-container">
         <iframe 
           src="${item.embedUrl}" 
@@ -173,24 +157,7 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Funkcja trybu kinowego
-function toggleTheater() {
-  const container = document.getElementById('video-container');
-  const btn = document.getElementById('theater-btn');
-  
-  if (container) {
-    container.classList.toggle('theater-mode');
-    if (btn) {
-      if (container.classList.contains('theater-mode')) {
-        btn.textContent = '❌ Zamknij pełny ekran';
-      } else {
-        btn.textContent = '📺 Pełny ekran na stronie';
-      }
-    }
-  }
-}
-
-// Pierwsze uruchomienie
 document.addEventListener('DOMContentLoaded', () => {
+  initCategoryButtons();
   renderMovies();
 });
