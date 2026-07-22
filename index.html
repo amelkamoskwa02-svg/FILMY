@@ -21,14 +21,18 @@
 
   <!-- Odtwarzacz Wideo -->
   <main class="container">
-    <section class="player-section">
-      <h2 id="video-title">Wybierz odcinek z listy poniżej</h2>
-      <div id="player-wrapper">
-        <div id="video-container">
-          <img src="https://placehold.co/800x450/111111/e50914?text=Wybierz+film" alt="Odtwarzacz" style="width: 100%; border-radius: 12px;">
-        </div>
-      </div>
-    </section>
+  <section class="player-section">
+  <div class="player-header">
+    <h2 id="video-title">Wybierz film lub odcinek</h2>
+    <div class="player-controls">
+      <button id="next-btn" class="player-btn" style="display: none;" title="Następny odcinek">Następny ⏭</button>
+      <button id="close-btn" class="player-btn close-btn" style="display: none;" title="Zamknij odtwarzacz">✕</button>
+    </div>
+  </div>
+  <div id="player-wrapper">
+    <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+poni%C5%BCej" alt="Podgląd" id="placeholder-img">
+  </div>
+</section>
 
     <!-- Siatka z kafelkami -->
     <section class="movies-section">
