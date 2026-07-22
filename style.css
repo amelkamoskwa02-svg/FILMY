@@ -248,3 +248,28 @@ header h1 {
     font-size: 12px;
   }
 }
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 44px;  /* Wygodny rozmiar pod kciuk */
+  height: 44px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 999999; /* Pewność, że nic go nie przysłania */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent; /* Usuwa szare podświetlenie w Safari/Chrome */
+  touch-action: manipulation;
+}
+
+.close-btn:active {
+  transform: scale(0.92);
+  background: rgba(255, 0, 0, 0.8);
+}
