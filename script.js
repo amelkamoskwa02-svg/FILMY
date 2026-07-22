@@ -74,7 +74,22 @@ const contentData = {
       poster: "https://placehold.co/200x300/111111/e50914?text=CSI+Odcinek+22",
       embedUrl: "https://drive.google.com/file/d/1HQ92V19nlXWlauoRVC9ICXmlODhkqNsI/preview"
     }
-  ]
+  ],
+  serial1670_s1: [
+    {
+      id: 2,
+      title: "1670: Sezon 1 - Odcinek 2",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S01E02",
+      embedUrl: "https://drive.google.com/file/d/1GqIuMtTefGKg2D4ygqJKmh_XhvSFkk01/preview"
+    },
+    {
+      id: 6,
+      title: "1670: Sezon 1 - Odcinek 6",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S01E06",
+      embedUrl: "https://drive.google.com/file/d/10qzsVVmpoVdiaiU35Fh5qIKCKic348Is/preview"
+    }
+  ],
+  serial1670_s2: []
 };
 
 // Automatyczne szukanie elementu siatki w HTML
@@ -100,7 +115,7 @@ function renderMovies() {
   const currentList = contentData[currentCategory] || [];
 
   if (currentList.length === 0) {
-    moviesGrid.innerHTML = '<p style="color: #888; text-align: center; grid-column: 1/-1;">Brak filmów w tej kategorii.</p>';
+    moviesGrid.innerHTML = '<p style="color: #888; text-align: center; grid-column: 1/-1;">Brak filmów/odcinków w tej kategorii.</p>';
     return;
   }
 
