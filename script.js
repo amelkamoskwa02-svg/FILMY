@@ -256,10 +256,48 @@ function saveTime() {
 }
 
 function openForTV() {
-  if (!currentPlayingItem || !currentPlayingItem.embedUrl) return;
-  // Zastępuje '/preview' na '/view', aby otworzyć pełny player Google Drive w nowym oknie
-  const fullUrl = currentPlayingItem.embedUrl.replace('/preview', '/view');
-  window.open(fullUrl, '_blank');
+  if (!currentPlayingItem) return;
+  
+  // Włącza / wyłącza tryb kinowy na stronie
+  document.body.classList.toggle('tv-mode');
+  
+  const castBtn = document.getElementById('cast-btn');
+  if (castBtn) {
+    if (document.body.classList.contains('tv-mode')) {
+      castBtn.textContent = "↩ Wróć do strony";
+      castBtn.style.background = "#e50914";
+    } else {
+      castBtn.textContent = "📺 Na TV";
+      castBtn.style.background = "rgba(255, 255, 255, 0.15)";
+    }
+  }
+}
+
+function closePlayer() {
+  document.body.classList.remove('tv-mode'); // Wyłącz tryb TV przy zamknięciu
+  
+  const playerWrapper = document.getElementById('player-wrapper');
+  const videoTitle = document.getElementById('video-title');
+  const closeBtn = document.getElementById('close-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const castBtn = document.getElementById('cast-btn');
+  const timestampControls = document.getElementById('timestamp-controls');
+
+  if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
+  if (playerWrapper) {
+    playerWrapper.innerHTML = `
+      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+poni%C3%BCej" alt="Podgląd" id="placeholder-img">
+    `;
+  }
+  if (timestampControls) timestampControls.style.display = 'none';
+  if (castBtn) {
+    castBtn.style.display = 'none';
+    castBtn.textContent = "📺 Na TV";
+    castBtn.style.background = "rgba(255, 255, 255, 0.15)";
+  }
+  if (closeBtn) closeBtn.style.display = 'none';
+  if (nextBtn) nextBtn.style.display = 'none';
+  currentPlayingItem = null;
 }
 
 function closePlayer() {
