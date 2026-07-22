@@ -167,7 +167,6 @@ const contentData = {
 
 let currentCategory = 'csi';
 let currentPlayingItem = null;
-let isCustomFullscreen = false;
 
 function renderMovies() {
   const moviesGrid = document.getElementById('movies-grid');
@@ -200,14 +199,8 @@ function renderMovies() {
         <h3>${item.title}</h3>
       </div>
     `;
-    
-    // Dodana obsługa kliknięcia i dotyku dla telefonów
-    card.addEventListener('click', () => playMovie(item));
-    card.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      playMovie(item);
-    });
 
+    card.addEventListener('click', () => playMovie(item));
     moviesGrid.appendChild(card);
   });
 }
@@ -215,17 +208,13 @@ function renderMovies() {
 function initCategoryButtons() {
   const categoryButtons = document.querySelectorAll('.category-btn');
   categoryButtons.forEach(button => {
-    const switchCat = (e) => {
-      if (e) e.preventDefault();
+    button.addEventListener('click', (e) => {
       categoryButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
+      e.target.classList.add('active');
 
-      currentCategory = button.getAttribute('data-category');
+      currentCategory = e.target.getAttribute('data-category');
       renderMovies();
-    };
-
-    button.addEventListener('click', switchCat);
-    button.addEventListener('touchend', switchCat);
+    });
   });
 }
 
@@ -276,60 +265,57 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Funkcja przełączania odtwarzacza w tryb pełnoekranowy na telefonie/PC
-function toggleFullscreen(e) {
-  if (e) e.preventDefault();
+// Funkcja otwierająca/zamykająca Pełny Ekran NA STRONIE (Działa na iOS i Androidzie)
+function toggleFullscreen() {
   const playerSection = document.querySelector('.player-section');
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+
   if (!playerSection) return;
 
-  if (!isCustomFullscreen) {
-    playerSection.style.position = 'fixed';
-    playerSection.style.top = '0';
-    playerSection.style.left = '0';
-    playerSection.style.width = '100vw';
-    playerSection.style.height = '100vh';
-    playerSection.style.zIndex = '99999';
-    playerSection.style.borderRadius = '0';
-    playerSection.style.padding = '8px';
-    playerSection.style.display = 'flex';
-    playerSection.style.flexDirection = 'column';
-
-    const playerWrapper = document.getElementById('player-wrapper');
-    if (playerWrapper) {
-      playerWrapper.style.flex = '1';
-      playerWrapper.style.height = '100%';
-    }
-    isCustomFullscreen = true;
+  if (!playerSection.classList.contains('is-fullscreen')) {
+    playerSection.classList.add('is-fullscreen');
+    document.body.style.overflow = 'hidden'; // Zablokowanie przewijania strony w tle
+    if (fullscreenBtn) fullscreenBtn.textContent = '✕ Wyjdź';
   } else {
-    exitCustomFullscreen();
+    exitFullscreen();
   }
 }
 
-function exitCustomFullscreen() {
+function exitFullscreen() {
   const playerSection = document.querySelector('.player-section');
-  const playerWrapper = document.getElementById('player-wrapper');
-  if (!playerSection) return;
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
 
-  playerSection.style.position = '';
-  playerSection.style.top = '';
-  playerSection.style.left = '';
-  playerSection.style.width = '';
-  playerSection.style.height = '';
-  playerSection.style.zIndex = '';
-  playerSection.style.borderRadius = '';
-  playerSection.style.padding = '';
-  playerSection.style.display = '';
-  playerSection.style.flexDirection = '';
-
-  if (playerWrapper) {
-    playerWrapper.style.flex = '';
-    playerWrapper.style.height = '';
+  if (playerSection && playerSection.classList.contains('is-fullscreen')) {
+    playerSection.classList.remove('is-fullscreen');
+    document.body.style.overflow = '';
+    if (fullscreenBtn) fullscreenBtn.textContent = '⛶ Pełny ekran';
   }
-  isCustomFullscreen = false;
 }
 
-function saveTime(e) {
-  if (e) e.preventDefault();
+function closePlayer() {
+  exitFullscreen();
+
+  const playerWrapper = document.getElementById('player-wrapper');
+  const videoTitle = document.getElementById('video-title');
+  const closeBtn = document.getElementById('close-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+  const timestampControls = document.getElementById('timestamp-controls');
+
+  if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
+  if (playerWrapper) {
+    playerWrapper.innerHTML = `
+      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
+    `;
+  }
+  if (timestampControls) timestampControls.style.display = 'none';
+  if (closeBtn) closeBtn.style.display = 'none';
+  if (nextBtn) nextBtn.style.display = 'none';
+  if (fullscreenBtn) fullscreenBtn.style.display = 'none';
+  currentPlayingItem = null;
+}
+
+function saveTime() {
   if (!currentPlayingItem) return;
   const timeInput = document.getElementById('time-input');
   if (!timeInput) return;
@@ -352,35 +338,7 @@ function saveTime(e) {
   }
 }
 
-function closePlayer(e) {
-  if (e) e.preventDefault();
-  if (isCustomFullscreen) {
-    exitCustomFullscreen();
-    return;
-  }
-
-  const playerWrapper = document.getElementById('player-wrapper');
-  const videoTitle = document.getElementById('video-title');
-  const closeBtn = document.getElementById('close-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
-  const timestampControls = document.getElementById('timestamp-controls');
-
-  if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
-  if (playerWrapper) {
-    playerWrapper.innerHTML = `
-      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
-    `;
-  }
-  if (timestampControls) timestampControls.style.display = 'none';
-  if (closeBtn) closeBtn.style.display = 'none';
-  if (nextBtn) nextBtn.style.display = 'none';
-  if (fullscreenBtn) fullscreenBtn.style.display = 'none';
-  currentPlayingItem = null;
-}
-
-function playNextMovie(e) {
-  if (e) e.preventDefault();
+function playNextMovie() {
   if (!currentPlayingItem) return;
   const currentList = contentData[currentCategory] || [];
   const currentIndex = currentList.findIndex(x => x.id === currentPlayingItem.id);
@@ -399,20 +357,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const fullscreenBtn = document.getElementById('fullscreen-btn');
   const saveTimeBtn = document.getElementById('save-time-btn');
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closePlayer);
-    closeBtn.addEventListener('touchend', closePlayer);
-  }
-  if (nextBtn) {
-    nextBtn.addEventListener('click', playNextMovie);
-    nextBtn.addEventListener('touchend', playNextMovie);
-  }
-  if (fullscreenBtn) {
-    fullscreenBtn.addEventListener('click', toggleFullscreen);
-    fullscreenBtn.addEventListener('touchend', toggleFullscreen);
-  }
-  if (saveTimeBtn) {
-    saveTimeBtn.addEventListener('click', saveTime);
-    saveTimeBtn.addEventListener('touchend', saveTime);
-  }
+  if (closeBtn) closeBtn.addEventListener('click', closePlayer);
+  if (nextBtn) nextBtn.addEventListener('click', playNextMovie);
+  if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+  if (saveTimeBtn) saveTimeBtn.addEventListener('click', saveTime);
 });
