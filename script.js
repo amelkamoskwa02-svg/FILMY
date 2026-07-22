@@ -133,6 +133,12 @@ const contentData = {
       embedUrl: "https://drive.google.com/file/d/15ragcbz8JZEHPgmacnhmJBYoQei85Whc/preview"
     },
     {
+      id: 2,
+      title: "1670: Sezon 2 - Odcinek 2",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S02E02",
+      embedUrl: "https://drive.google.com/file/d/1tfjBOhesMZSuhyuRdXyjWox5a0REiaZ5/preview"
+    },
+    {
       id: 3,
       title: "1670: Sezon 2 - Odcinek 3",
       poster: "https://placehold.co/200x300/111111/e50914?text=1670+S02E03",
@@ -143,6 +149,18 @@ const contentData = {
       title: "1670: Sezon 2 - Odcinek 4",
       poster: "https://placehold.co/200x300/111111/e50914?text=1670+S02E04",
       embedUrl: "https://drive.google.com/file/d/18nTv1Pq8kQ1khInelaHX00C-2fCvRSFh/preview"
+    },
+    {
+      id: 5,
+      title: "1670: Sezon 2 - Odcinek 5",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S02E05",
+      embedUrl: "https://drive.google.com/file/d/1hxznBeE3PyCAlrG1dw_mapo5wJkhdjmx/preview"
+    },
+    {
+      id: 8,
+      title: "1670: Sezon 2 - Odcinek 8",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S02E08",
+      embedUrl: "https://drive.google.com/file/d/1XaSey16yIv_EEr9vgZiULXdDuD7N4yHw/preview"
     }
   ]
 };
