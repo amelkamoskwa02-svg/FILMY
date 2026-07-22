@@ -276,3 +276,46 @@ header {
   font-weight: bold !important;
   z-index: 2 !important;
 }
+/* Tryb kinowy dla przesyłania na TV */
+body.tv-mode {
+  overflow: hidden !important;
+  background: #000000 !important;
+}
+
+body.tv-mode header,
+body.tv-mode .categories-section,
+body.tv-mode .movies-section,
+body.tv-mode footer {
+  display: none !important;
+}
+
+body.tv-mode .player-section {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999999 !important;
+  background: #000000 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+body.tv-mode .player-header {
+  padding: 10px 20px !important;
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+body.tv-mode #player-wrapper {
+  flex: 1 !important;
+  height: calc(100vh - 60px) !important;
+  margin: 0 !important;
+}
+
+body.tv-mode iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+}
