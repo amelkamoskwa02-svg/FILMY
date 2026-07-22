@@ -190,3 +190,59 @@ header {
   max-height: 360px !important; /* Ogranicza wysokość, by odtwarzacz nie był za duży */
   object-fit: cover !important;
 }
+/* Nagłówek odtwarzacza i przyciski sterowania */
+.player-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 12px !important;
+  gap: 10px !important;
+}
+
+.player-controls {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+.player-btn {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 8px 14px !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+}
+
+.player-btn:hover {
+  background: #e50914 !important;
+  border-color: #e50914 !important;
+  transform: scale(1.05) !important;
+}
+
+.close-btn {
+  background: rgba(229, 9, 20, 0.3) !important;
+  border-color: rgba(229, 9, 20, 0.5) !important;
+}
+
+/* Oznaczenie ostatnio oglądanego odcinka */
+.movie-card.watched {
+  border: 2px solid #e50914 !important;
+  position: relative !important;
+}
+
+.movie-card.watched::after {
+  content: "Ostatnio oglądane" !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  background: #e50914 !important;
+  color: #fff !important;
+  font-size: 10px !important;
+  padding: 3px 6px !important;
+  border-radius: 4px !important;
+  font-weight: bold !important;
+}
