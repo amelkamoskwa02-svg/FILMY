@@ -1,155 +1,56 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-    <title>Moje Filmy</title>
-
-    <meta name="theme-color" content="#141414">
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Moje Filmy i Seriale</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- TŁO -->
-<div class="background-overlay"></div>
+  <header>
+    <h1>Moje Filmy i Seriale</h1>
+  </header>
 
-<!-- HEADER -->
-
-<header class="header">
-
-    <div class="logo">
-        MOJE FILMY
-    </div>
-
-    <nav>
-
-        <button class="category-btn active" data-category="csi">
-            CSI
-        </button>
-
-        <button class="category-btn" data-category="serial1670_s1">
-            1670 S1
-        </button>
-
-        <button class="category-btn" data-category="serial1670_s2">
-            1670 S2
-        </button>
-
-        <button class="category-btn" data-category="filmy">
-            Filmy
-        </button>
-
-    </nav>
-
-</header>
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <h1>
-            Oglądaj gdzie chcesz.
-        </h1>
-
-        <p>
-            Twoja prywatna biblioteka filmów i seriali.
-        </p>
-
-    </div>
-
-</section>
-
-<!-- KONTYNUUJ -->
-
-<section class="continue-section">
-
-    <h2>
-        Kontynuuj oglądanie
-    </h2>
-
-    <div id="continue-grid">
-
-        <div class="continue-placeholder">
-
-            Nie oglądałeś jeszcze żadnego filmu.
-
+  <main class="container">
+    <!-- Odtwarzacz -->
+    <section class="player-section" id="player-section">
+      <div class="player-header">
+        <h2 id="video-title">Wybierz film lub odcinek</h2>
+        <div class="player-controls">
+          <div id="timestamp-controls" style="display: none; align-items: center; gap: 6px;">
+            <input type="text" id="time-input" placeholder="np. 12:30">
+            <button id="save-time-btn" class="player-btn" title="Zapisz minutę">💾 Zapisz</button>
+          </div>
+          <button id="next-btn" class="player-btn" style="display: none;" title="Następny odcinek">⏭</button>
+          
+          <!-- Przycisk widoczny TYLKO na telefonie -->
+          <button id="mobile-fullscreen-btn" class="player-btn mobile-only" style="display: none;" title="Pełny ekran (Mobilny)">📱 Pełny ekran</button>
+          
+          <button id="close-btn" class="player-btn close-btn" style="display: none;" aria-label="Zamknij" title="Zamknij odtwarzacz">✕ Zamknij</button>
         </div>
+      </div>
+      <div id="player-wrapper">
+        <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
+      </div>
+    </section>
 
-    </div>
+    <!-- Kategorie -->
+    <section class="categories-section">
+      <div class="categories">
+        <button class="category-btn" data-category="filmy">Filmy</button>
+        <button class="category-btn active" data-category="csi">CSI</button>
+        <button class="category-btn" data-category="serial1670_s1">1670 (Sezon 1)</button>
+        <button class="category-btn" data-category="serial1670_s2">1670 (Sezon 2)</button>
+      </div>
+    </section>
 
-</section>
+    <!-- Lista filmów/odcinków -->
+    <section class="movies-section">
+      <div id="movies-grid" class="movies-grid"></div>
+    </section>
+  </main>
 
-<!-- ODTWARZACZ -->
-
-<section
-class="player-section"
-id="player-section">
-
-<div class="player-top">
-
-<button
-id="back-btn"
-class="back-btn">
-
-← Powrót
-
-</button>
-
-<h2 id="video-title">
-
-Wybierz odcinek
-
-</h2>
-
-</div>
-
-<div id="player-wrapper">
-
-<img
-id="placeholder-img"
-src="https://placehold.co/1280x720/111111/ffffff?text=Wybierz+film"
-alt="placeholder">
-
-</div>
-
-</section>
-
-<!-- LISTA -->
-
-<section class="movies">
-
-<h2>
-
-Dostępne odcinki
-
-</h2>
-
-<div
-id="movies-grid"
-class="movies-grid">
-
-</div>
-
-</section>
-
-<!-- STOPKA -->
-
-<footer>
-
-<p>
-
-© 2025 Moje Filmy
-
-</p>
-
-</footer>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
