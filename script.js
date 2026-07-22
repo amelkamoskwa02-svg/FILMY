@@ -265,7 +265,7 @@ function playMovie(item) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Funkcja otwierająca/zamykająca Pełny Ekran NA STRONIE (Działa na iOS i Androidzie)
+// Funkcja otwierająca/zamykająca Pełny Ekran z blokadą strony w tle
 function toggleFullscreen() {
   const playerSection = document.querySelector('.player-section');
   const fullscreenBtn = document.getElementById('fullscreen-btn');
@@ -274,11 +274,47 @@ function toggleFullscreen() {
 
   if (!playerSection.classList.contains('is-fullscreen')) {
     playerSection.classList.add('is-fullscreen');
-    document.body.style.overflow = 'hidden'; // Zablokowanie przewijania strony w tle
+    document.body.classList.add('no-scroll'); // Dodaje całkowitą blokadę przewijania tła
     if (fullscreenBtn) fullscreenBtn.textContent = '✕ Wyjdź';
   } else {
     exitFullscreen();
   }
+}
+
+function exitFullscreen() {
+  const playerSection = document.querySelector('.player-section');
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+  if (playerSection && playerSection.classList.contains('is-fullscreen')) {
+    playerSection.classList.remove('is-fullscreen');
+    document.body.classList.remove('no-scroll'); // Zdejmowanie blokady
+    if (fullscreenBtn) fullscreenBtn.textContent = '⛶ Pełny ekran';
+  }
+}
+
+function closePlayer() {
+  exitFullscreen();
+
+  const playerWrapper = document.getElementById('player-wrapper');
+  const videoTitle = document.getElementById('video-title');
+  const closeBtn = document.getElementById('close-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+  const openDriveBtn = document.getElementById('open-drive-btn');
+  const timestampControls = document.getElementById('timestamp-controls');
+
+  if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
+  if (playerWrapper) {
+    playerWrapper.innerHTML = `
+      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
+    `;
+  }
+  if (timestampControls) timestampControls.style.display = 'none';
+  if (closeBtn) closeBtn.style.display = 'none';
+  if (nextBtn) nextBtn.style.display = 'none';
+  if (fullscreenBtn) fullscreenBtn.style.display = 'none';
+  if (openDriveBtn) openDriveBtn.style.display = 'none';
+  currentPlayingItem = null;
 }
 
 function exitFullscreen() {
