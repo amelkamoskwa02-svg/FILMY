@@ -186,7 +186,6 @@ function playMovie(item) {
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
-  const castBtn = document.getElementById('cast-btn');
   const timestampControls = document.getElementById('timestamp-controls');
   const timeInput = document.getElementById('time-input');
 
@@ -216,7 +215,6 @@ function playMovie(item) {
   }
 
   if (timestampControls) timestampControls.style.display = 'flex';
-  if (castBtn) castBtn.style.display = 'inline-block';
   if (closeBtn) closeBtn.style.display = 'inline-block';
   
   const currentList = contentData[currentCategory] || [];
@@ -255,67 +253,20 @@ function saveTime() {
   }
 }
 
-function openForTV() {
-  if (!currentPlayingItem) return;
-  
-  // Włącza / wyłącza tryb kinowy na stronie
-  document.body.classList.toggle('tv-mode');
-  
-  const castBtn = document.getElementById('cast-btn');
-  if (castBtn) {
-    if (document.body.classList.contains('tv-mode')) {
-      castBtn.textContent = "↩ Wróć do strony";
-      castBtn.style.background = "#e50914";
-    } else {
-      castBtn.textContent = "📺 Na TV";
-      castBtn.style.background = "rgba(255, 255, 255, 0.15)";
-    }
-  }
-}
-
-function closePlayer() {
-  document.body.classList.remove('tv-mode'); // Wyłącz tryb TV przy zamknięciu
-  
-  const playerWrapper = document.getElementById('player-wrapper');
-  const videoTitle = document.getElementById('video-title');
-  const closeBtn = document.getElementById('close-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const castBtn = document.getElementById('cast-btn');
-  const timestampControls = document.getElementById('timestamp-controls');
-
-  if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
-  if (playerWrapper) {
-    playerWrapper.innerHTML = `
-      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+poni%C3%BCej" alt="Podgląd" id="placeholder-img">
-    `;
-  }
-  if (timestampControls) timestampControls.style.display = 'none';
-  if (castBtn) {
-    castBtn.style.display = 'none';
-    castBtn.textContent = "📺 Na TV";
-    castBtn.style.background = "rgba(255, 255, 255, 0.15)";
-  }
-  if (closeBtn) closeBtn.style.display = 'none';
-  if (nextBtn) nextBtn.style.display = 'none';
-  currentPlayingItem = null;
-}
-
 function closePlayer() {
   const playerWrapper = document.getElementById('player-wrapper');
   const videoTitle = document.getElementById('video-title');
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
-  const castBtn = document.getElementById('cast-btn');
   const timestampControls = document.getElementById('timestamp-controls');
 
   if (videoTitle) videoTitle.textContent = "Wybierz film lub odcinek";
   if (playerWrapper) {
     playerWrapper.innerHTML = `
-      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+poni%C3%BCej" alt="Podgląd" id="placeholder-img">
+      <img src="https://placehold.co/800x450/111111/FFFFFF?text=Wybierz+odcinek+z+listy+ponizej" alt="Podgląd" id="placeholder-img">
     `;
   }
   if (timestampControls) timestampControls.style.display = 'none';
-  if (castBtn) castBtn.style.display = 'none';
   if (closeBtn) closeBtn.style.display = 'none';
   if (nextBtn) nextBtn.style.display = 'none';
   currentPlayingItem = null;
@@ -337,11 +288,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const closeBtn = document.getElementById('close-btn');
   const nextBtn = document.getElementById('next-btn');
-  const castBtn = document.getElementById('cast-btn');
   const saveTimeBtn = document.getElementById('save-time-btn');
 
   if (closeBtn) closeBtn.addEventListener('click', closePlayer);
   if (nextBtn) nextBtn.addEventListener('click', playNextMovie);
-  if (castBtn) castBtn.addEventListener('click', openForTV);
   if (saveTimeBtn) saveTimeBtn.addEventListener('click', saveTime);
 });
