@@ -83,6 +83,12 @@ const contentData = {
       embedUrl: "https://drive.google.com/file/d/1GqIuMtTefGKg2D4ygqJKmh_XhvSFkk01/preview"
     },
     {
+      id: 3,
+      title: "1670: Sezon 1 - Odcinek 3",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S01E03",
+      embedUrl: "https://drive.google.com/file/d/1lCpGO5mVxWoDKvGGyoGZUW8HtSq8ZzOO/preview"
+    },
+    {
       id: 6,
       title: "1670: Sezon 1 - Odcinek 6",
       poster: "https://placehold.co/200x300/111111/e50914?text=1670+S01E06",
