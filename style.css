@@ -246,3 +246,19 @@ header {
   border-radius: 4px !important;
   font-weight: bold !important;
 }
+/* Poprawka nakładania się przycisku zamknij na ikonę Google Drive */
+.player-section {
+  position: relative !important;
+}
+
+.player-header {
+  position: relative !important;
+  z-index: 10 !important;
+  margin-bottom: 15px !important; /* Daje odstęp między przyciskami a filmem */
+}
+
+#player-wrapper {
+  position: relative !important;
+  z-index: 1 !important;
+  margin-top: 10px !important;
+}
