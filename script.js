@@ -125,7 +125,26 @@ const contentData = {
       embedUrl: "https://drive.google.com/file/d/1_60ic0-0y-FrNqUDK7GOIh9strvi3ELT/preview"
     }
   ],
-  serial1670_s2: []
+  serial1670_s2: [
+    {
+      id: 1,
+      title: "1670: Sezon 2 - Odcinek 1",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S02E01",
+      embedUrl: "https://drive.google.com/file/d/15ragcbz8JZEHPgmacnhmJBYoQei85Whc/preview"
+    },
+    {
+      id: 3,
+      title: "1670: Sezon 2 - Odcinek 3",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S02E03",
+      embedUrl: "https://drive.google.com/file/d/10-qrT-OnGDDPxg8kZ8gLjLW3QjA0A8Ox/preview"
+    },
+    {
+      id: 4,
+      title: "1670: Sezon 2 - Odcinek 4",
+      poster: "https://placehold.co/200x300/111111/e50914?text=1670+S02E04",
+      embedUrl: "https://drive.google.com/file/d/18nTv1Pq8kQ1khInelaHX00C-2fCvRSFh/preview"
+    }
+  ]
 };
 
 let currentCategory = 'csi';
@@ -196,16 +215,11 @@ function playMovie(item) {
   
   if (playerWrapper && item.embedUrl) {
     playerWrapper.innerHTML = `
-      <div id="video-container">
-        <iframe 
-          src="${item.embedUrl}" 
-          width="100%" 
-          height="500" 
-          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
-          allowfullscreen 
-          style="border:none; border-radius:12px;">
-        </iframe>
-      </div>
+      <iframe 
+        src="${item.embedUrl}" 
+        allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
     `;
   }
 
