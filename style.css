@@ -276,19 +276,23 @@ header {
   font-weight: bold !important;
   z-index: 2 !important;
 }
-/* Tryb kinowy dla przesyłania na TV */
-body.tv-mode {
-  overflow: hidden !important;
-  background: #000000 !important;
-}
+/* --- TRYB KINOWY / TV --- */
 
-body.tv-mode header,
-body.tv-mode .categories-section,
-body.tv-mode .movies-section,
-body.tv-mode footer {
+/* Ukrywamy absolutnie wszystko poza odtwarzaczem */
+body.tv-mode > *:not(.player-section) {
   display: none !important;
 }
 
+body.tv-mode {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #000000 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Sekcja odtwarzacza na pełny ekran */
 body.tv-mode .player-section {
   position: fixed !important;
   top: 0 !important;
@@ -301,21 +305,45 @@ body.tv-mode .player-section {
   margin: 0 !important;
   display: flex !important;
   flex-direction: column !important;
+  box-sizing: border-box !important;
 }
 
+/* Pasek z nagłówkiem i przyciskami na samej górze */
 body.tv-mode .player-header {
-  padding: 10px 20px !important;
-  background: rgba(0, 0, 0, 0.9) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 60px !important;
+  padding: 0 20px !important;
+  background: #000000 !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
 }
 
-body.tv-mode #player-wrapper {
-  flex: 1 !important;
+body.tv-mode #video-title {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Odtwarzacz wideo rozciągnięty na resztę ekranu */
+body.tv-mode #player-wrapper,
+body.tv-mode #video-container {
+  width: 100% !important;
   height: calc(100vh - 60px) !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 body.tv-mode iframe {
   width: 100% !important;
   height: 100% !important;
+  border: none !important;
   border-radius: 0 !important;
+  display: block !important;
 }
